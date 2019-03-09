@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Entities;
 
-public class HorisontalProxy : MonoBehaviour, IConvertGameObjectToEntity
+public class HorisontalProxy : MonoBehaviour//, IConvertGameObjectToEntity
 {
-    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem converstionSystem)
+    private bool _isPositiveMovement = true;
+
+    private void Start()
     {
-        var data = new Horisontal();
-        dstManager.AddComponentData(entity, data);
-        //throw new System.NotImplementedException();
+        //Messenger<MoveType, Transform, bool>.Broadcast
+        //    (InstanceEvents.OnAdding.ToString(), 
+        //    MoveType.horisontal, 
+        //    this.transform, 
+        //    _isPositiveMovement);
     }
+
+    //public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem converstionSystem)
+    //{
+    //    var data = new Horisontal();
+    //    dstManager.AddComponentData(entity, data);
+    //    //throw new System.NotImplementedException();
+    //}
 }

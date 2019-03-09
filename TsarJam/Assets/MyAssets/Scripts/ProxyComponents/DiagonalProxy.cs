@@ -3,13 +3,23 @@ using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class DiagonalProxy : MonoBehaviour, IConvertGameObjectToEntity
+public class DiagonalProxy : MonoBehaviour//, IConvertGameObjectToEntity
 {
-    public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem converstionSystem)
+    private bool isPositiveMovement = true;
+
+    private void Start()
     {
-        var data = new Diagonal();
-        dstManager.AddComponentData(entity, data);
-        //throw new NotImplementedException();
+        //Messenger<MoveType, Transform, bool>.Broadcast
+        //    (InstanceEvents.OnAdding.ToString(), 
+        //    MoveType.diagonal, 
+        //    this.transform,
+        //    isPositiveMovement);
     }
 
+    //public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem converstionSystem)
+    //{
+    //    var data = new Diagonal();
+    //    dstManager.AddComponentData(entity, data);
+    //    //throw new NotImplementedException();
+    //}
 }

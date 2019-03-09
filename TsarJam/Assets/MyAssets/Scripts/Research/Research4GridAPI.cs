@@ -21,18 +21,23 @@ public class Research4GridAPI : MonoBehaviour
     private void Awake()
     {
         if (!grid) grid = GameObject.FindObjectOfType<Grid>(); ///если в игре будет больше одной сетки, возникнут проблемы.
+
+        
     }
 
 
-    public Vector2 direction;
+    //public Vector2 direction;
 
-    //private void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //        pos.z = 0;
-    //        Debug.Log("Position is "+pos + ", gridCoords is "+grid.LocalToCell(pos));
-    //    }
-    //}
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            //Debug.Log("Ju");
+            MoveSystem.MoveNext();
+        }
+        //    Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    pos.z = 0;
+        //    Debug.Log("Position is " + pos + ", gridCoords is " + grid.LocalToCell(pos));
+        //}
+    }
 }
