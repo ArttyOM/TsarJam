@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public static class GObjAllocator
 {
+
     public static List<Figure> Figures = new List<Figure>();
+
+    public static Grid grid;
+    public static TilemapCollider2D tilemapCollider;
 
     [RuntimeInitializeOnLoadMethod]
     private static void InitListeners()
@@ -14,8 +19,9 @@ public static class GObjAllocator
     }
 
     private static void OnAdding(Figure figure)
-    {
+    {        
         Figures.Add(figure);
+        Debug.Log("figure added");
     }
 
 
@@ -25,9 +31,9 @@ public static class GObjAllocator
 /// 1) Transform
 /// 2) direction==true - обычное направление движения, ==false - противоположное
 /// </summary>
-public struct Figure
+public class Figure
 {
     public MoveType moveType;
     public Transform transform;
-    public bool direction;
+    public byte direction = 0;
 }

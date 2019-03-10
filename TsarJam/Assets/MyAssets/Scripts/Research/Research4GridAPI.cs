@@ -2,27 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
+using UnityEngine.Tilemaps;
 
 public class Research4GridAPI : MonoBehaviour
 {
-    public static int2 GetCurrentPos(Vector3 localPos)
-    {
-        Vector3Int tmp = grid.LocalToCell(localPos);
+    //public static int2 GetCurrentPos(Vector3 localPos)
+    //{
+    //    Vector3Int tmp = grid.LocalToCell(localPos);
 
-        int2 result;
-        result.x = tmp.x;
-        result.y = tmp.y;
+    //    int2 result;
+    //    result.x = tmp.x;
+    //    result.y = tmp.y;
 
-        return result;
-    }
+    //    return result;
+    //}
 
-    public static Grid grid;
+    public static Grid grid = GObjAllocator.grid;
+    public static TilemapCollider2D tilemapCollider = GObjAllocator.tilemapCollider;
 
     private void Awake()
     {
-        if (!grid) grid = GameObject.FindObjectOfType<Grid>(); ///если в игре будет больше одной сетки, возникнут проблемы.
+        if (!grid)
+        {
+            grid = GameObject.FindObjectOfType<Grid>(); ///если в игре будет больше одной сетки, возникнут проблемы.
+            GObjAllocator.grid = grid;
+        }
 
-        
+        if (!tilemapCollider)
+        {
+            tilemapCollider = GameObject.FindObjectOfType<TilemapCollider2D>();
+            GObjAllocator.tilemapCollider = tilemapCollider;
+        }
     }
 
 
@@ -32,8 +42,8 @@ public class Research4GridAPI : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            //Debug.Log("Ju");
-            MoveSystem.MoveNext();
+           // Debug.Log("Ju");
+            MoveSystem.MoveNext(grid);
         }
         //    Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //    pos.z = 0;

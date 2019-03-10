@@ -4,16 +4,21 @@ using Unity.Mathematics;
 using UnityEngine;
 
 public class DiagonalProxy : MonoBehaviour//, IConvertGameObjectToEntity
-{
-    private bool isPositiveMovement = true;
+{ 
 
     private void Start()
     {
-        //Messenger<MoveType, Transform, bool>.Broadcast
-        //    (InstanceEvents.OnAdding.ToString(), 
-        //    MoveType.diagonal, 
-        //    this.transform,
-        //    isPositiveMovement);
+        Figure tupple = new Figure
+        {
+            moveType = MoveType.diagonal,
+            transform = this.transform,
+            direction = 0
+        };
+
+        Messenger<Figure>.Broadcast
+            (InstanceEvents.OnAdding.ToString(),
+            tupple
+            );
     }
 
     //public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem converstionSystem)

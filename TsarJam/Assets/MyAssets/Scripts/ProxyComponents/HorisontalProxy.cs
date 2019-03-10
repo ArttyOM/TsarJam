@@ -5,15 +5,20 @@ using Unity.Entities;
 
 public class HorisontalProxy : MonoBehaviour//, IConvertGameObjectToEntity
 {
-    private bool _isPositiveMovement = true;
 
     private void Start()
     {
-        //Messenger<MoveType, Transform, bool>.Broadcast
-        //    (InstanceEvents.OnAdding.ToString(), 
-        //    MoveType.horisontal, 
-        //    this.transform, 
-        //    _isPositiveMovement);
+        Figure tupple = new Figure
+        {
+            moveType = MoveType.horisontal,
+            transform = this.transform,
+            direction = 0
+        };
+
+        Messenger<Figure>.Broadcast
+            (InstanceEvents.OnAdding.ToString(),
+            tupple
+            );
     }
 
     //public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem converstionSystem)

@@ -14,7 +14,7 @@ public class VerticalProxy : MonoBehaviour//, IConvertGameObjectToEntity
         Figure tupple = new Figure {
             moveType = MoveType.vertical,
             transform = this.transform,
-            direction = true
+            direction = 0
         };
         
         Messenger<Figure>.Broadcast
