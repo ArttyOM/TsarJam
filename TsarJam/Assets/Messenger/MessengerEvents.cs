@@ -8,4 +8,6 @@ using System;
 
 //public enum ProjectilesEvents { Release }   
 
-public enum InstanceEvents { OnAdding }
+public enum InstanceEvents { OnAdding, OnDeath }
+
+public enum GameEvents { Win}

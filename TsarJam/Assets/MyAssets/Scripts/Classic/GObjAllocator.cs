@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 
 public static class GObjAllocator
 {
+    public const int WinScore = 15;
+
 
     public static List<Figure> Figures = new List<Figure>();
 
@@ -14,20 +16,30 @@ public static class GObjAllocator
     [RuntimeInitializeOnLoadMethod]
     private static void InitListeners()
     {
-        Debug.Log("Listener added");
-         Messenger<Figure>.AddListener(InstanceEvents.OnAdding.ToString(), OnAdding);
+        // Debug.Log("Listeners added");
+        Messenger<Figure>.AddListener(InstanceEvents.OnAdding.ToString(), OnAdding);
+
+        Messenger <Figure>.AddListener(InstanceEvents.OnDeath.ToString(), OnDeath);
     }
 
     private static void OnAdding(Figure figure)
     {        
         Figures.Add(figure);
-        Debug.Log("figure added");
+        KillSystem.KillBroadcaster();
+        //Debug.Log("figure added");
     }
 
+    private static void OnDeath(Figure figure)
+    {
+        //Debug.Log("remove: "+ figure.transform.name);
+
+        Figures.Remove(figure);
+    }
 
 }
 
 /// <summary>
+/// 0) MoveType -тип фигуры
 /// 1) Transform
 /// 2) direction==true - обычное направление движения, ==false - противоположное
 /// </summary>

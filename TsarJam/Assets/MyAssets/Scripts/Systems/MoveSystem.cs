@@ -28,37 +28,6 @@ public static class MoveSystem
 {
     #region privateregion
 
-    //private static List<(Transform, bool)> _Verticals = new List<(Transform, bool)>();
-    //private static Dictionary<Transform, bool> _Horisontals = new Dictionary<Transform, bool>();
-    //private static Dictionary<Transform, bool> _Diagonals = new Dictionary<Transform, bool>();
-
-    /// <summary>
-    /// а в конструкторе то ж самое не работает - нужен был вызов любого метода, чтобы статик класс инициализаировался,
-    /// а на кой черт тогда конструктор?
-    /// </summary>
-    //[RuntimeInitializeOnLoadMethod]
-    //private static void InitListeners()
-    //{
-    //    Debug.Log("Listener added");
-    //   // Messenger<MoveType, (Transform, bool)>.AddListener(InstanceEvents.OnAdding.ToString(), OnAdding);
-    //}
-    //статики не могут содержать деструкторы и живут все время выполнения программы, так что усе чики-пики 
-    // RemoveListener нам не нужен
-
-    //private static void OnAdding(MoveType moveType, (Transform,bool) transformAndDirection)
-    //{
-    //    switch (moveType)
-    //    {
-    //        case MoveType.vertical: _Verticals.Add(transformAndDirection);
-    //            break;
-    //        //case MoveType.horisontal: _Horisontals.Add(transform, isPositiveMovement);
-    //        //    break;
-    //        //case MoveType.diagonal: _Diagonals.Add(transform, isPositiveMovement);
-    //         //   break;
-    //        //default:
-    //    }
-    //}
-
         ///вернет false если на пути CalculateNextPos будет стоять коллайдер
     private static Vector3Int CalculateNextPos( MoveType moveType, Vector3Int pos, byte direction)
     {
@@ -230,12 +199,14 @@ public static class MoveSystem
 
     public static void MoveNext(Grid grid)
     {
-
         Vector3Int currPos;
         Vector3Int nextPos;
 
         for (int i = 0; i < Figures.Count; i++)
         {
+            if (Figures == null) continue;
+   
+
             //currPos = grid.LocalToCell(GObjAllocator.Figures[i].transform.localPosition);
             currPos = grid.LocalToCell(Figures[i].transform.localPosition);
 
@@ -243,12 +214,12 @@ public static class MoveSystem
 
             if (IsBlocked(nextPos))
              {
-                Debug.Log("WayLocked");
+                //Debug.Log("WayLocked");
                 ChangeDirection(Figures[i].moveType, currPos, ref Figures[i].direction);
                 nextPos = CalculateNextPos(Figures[i].moveType, currPos, Figures[i].direction);
             }
 
-            Debug.Log("CurrPos: "+currPos+" NextPos: "+ nextPos);
+            //Debug.Log("CurrPos: "+currPos+" NextPos: "+ nextPos);
 
             Figures[i].transform.localPosition = grid.GetCellCenterLocal(nextPos);
 
