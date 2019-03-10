@@ -16,6 +16,11 @@ public class DragNDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         foreach(var obj in AllObjects)
         {
             obj._locked = false;
+
+            
+            Color color = obj._myImage.color;
+            color.a = 1f;
+            obj._myImage.color = color;
         }
     }
 
@@ -23,10 +28,14 @@ public class DragNDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Transform _parent;
     private bool _locked = false;
 
+    private Image _myImage;
+
     private void Awake()
     {
         AllObjects.Add(this);
         _parent = GameObject.Find("FiguresPivot").transform;
+
+        _myImage = GetComponent<Image>();
     }
 
     public bool dragOnSurfaces = true;
@@ -99,6 +108,11 @@ public class DragNDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if ((!IsBlocked(cellPos)) && !KillSystem.BusyCells.ContainsKey(cellPos))
         {
             _locked = true;
+
+            Color color = _myImage.color;
+            color.a = 0.5f;
+            _myImage.color = color;
+
             Instantiate(prefab, centerPos, Quaternion.identity, _parent);
         }
         

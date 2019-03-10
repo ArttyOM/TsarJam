@@ -46,6 +46,11 @@ public class MoveNextMono : MonoBehaviour
             // Debug.Log("Ju");
             MoveNext();
         }
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            Application.Quit();
+        }
     }
 
 
@@ -57,7 +62,7 @@ public class MoveNextMono : MonoBehaviour
             if(toggle.isOn)
             {
                 MoveNext();
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1.5f);
             }
 
             yield return null;

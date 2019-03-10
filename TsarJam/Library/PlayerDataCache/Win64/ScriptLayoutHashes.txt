@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/UnityBuilds/TsarJam/TsarJam.exe
+C:/UnityBuilds/TsuEFa/TsuEFa.exe
 SceneListBegin?
 Assets/MyAssets/Scenes/Main.unity
 SceneListEnd?
